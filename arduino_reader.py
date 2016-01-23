@@ -6,13 +6,7 @@ Description: This file reads in the data from the arduino and returns it
 """
 import serial
 
-def arduino_reader():
-    s = serial.Serial('/dev/tty.usbmodemFA131', 9600)
+def read_control(usb_port='/dev/tty.usbmodemFA131'):
+    s = serial.Serial(usb_port, 9600)
     while True:
 			yield s.readline()
-
-def main():
-    arduino_read()
-
-if __name__ == '__main__':
-    main()

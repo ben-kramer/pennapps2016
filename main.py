@@ -10,17 +10,14 @@ Description: This file works as the middle man between the arduino and the
 from flask import Flask
 from flask import request
 import arduino_reader as ar
+import string
 
 app = Flask(__name__)
-r = ar.arduino_reader()
+r = ar.read_control()
 
 @app.route('/control')
 def control_service():
-    return next(r)
-
-@app.route('/video', methods=['POST'])
-def video_service():
-    pass
+    return string.join(string.split(next(r), " ")[:3], " ")
 
 if __name__=='__main__':
-    app.run()
+    app.run(host = "10.251.75.127", debug=True)
